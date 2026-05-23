@@ -1,0 +1,189 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+:root {
+    color-scheme: light;
+}
+
+body {
+    @apply min-h-screen bg-[#f6f0e4] text-slate-900 antialiased;
+}
+
+@layer components {
+    .app-shell {
+        @apply relative flex min-h-screen flex-col;
+    }
+
+    .app-main {
+        @apply flex-1;
+    }
+
+    .shell {
+        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .toast-stack {
+        @apply pointer-events-none fixed right-4 top-4 z-[80] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-3 sm:right-6 sm:top-6;
+    }
+
+    .toast-card {
+        @apply pointer-events-auto relative flex items-start gap-3 overflow-hidden rounded-[1.6rem] border bg-white/92 px-4 py-4 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.35)] backdrop-blur-xl transition duration-300 ease-out;
+        animation: toast-enter 0.3s ease-out;
+    }
+
+    .toast-card-success {
+        @apply border-emerald-200/80 text-slate-900;
+    }
+
+    .toast-card-error {
+        @apply border-rose-200/80 text-slate-900;
+    }
+
+    .toast-icon {
+        @apply mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl;
+    }
+
+    .toast-icon-success {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+
+    .toast-icon-error {
+        @apply bg-rose-100 text-rose-700;
+    }
+
+    .toast-title {
+        @apply text-sm font-semibold tracking-wide text-slate-900;
+    }
+
+    .toast-message {
+        @apply mt-1 text-sm leading-6 text-slate-600;
+    }
+
+    .toast-list {
+        @apply mt-1 space-y-1 pr-3 text-sm leading-6 text-slate-600;
+    }
+
+    .toast-close {
+        @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-900/5 hover:text-slate-700;
+    }
+
+    .toast-progress {
+        @apply absolute inset-x-0 bottom-0 h-1 origin-left;
+        animation: toast-progress 5s linear forwards;
+    }
+
+    .toast-progress-success {
+        @apply bg-[linear-gradient(90deg,_rgba(16,185,129,0.95),_rgba(5,150,105,0.65))];
+    }
+
+    .toast-progress-error {
+        @apply bg-[linear-gradient(90deg,_rgba(244,63,94,0.95),_rgba(225,29,72,0.65))];
+    }
+
+    .toast-leaving {
+        @apply translate-x-8 opacity-0;
+    }
+
+    .surface-card {
+        @apply rounded-[2rem] border border-slate-950/5 bg-white/78 shadow-[0_24px_80px_-40px_rgba(18,42,30,0.45)] backdrop-blur;
+    }
+
+    .footer-card {
+        @apply rounded-[2rem] border border-slate-950/5 bg-white/68 px-5 py-5 shadow-[0_18px_60px_-42px_rgba(18,42,30,0.35)] backdrop-blur;
+    }
+
+    .button-primary {
+        @apply inline-flex items-center justify-center rounded-2xl bg-[linear-gradient(135deg,_#165a4c,_#f78334)] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_-20px_rgba(22,90,76,0.9)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_45px_-24px_rgba(22,90,76,0.9)];
+    }
+
+    .button-secondary {
+        @apply inline-flex items-center justify-center rounded-2xl border border-slate-900/10 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-slate-900/20 hover:bg-white;
+    }
+
+    .eyebrow {
+        @apply text-xs font-semibold uppercase tracking-[0.28em] text-emerald-800/75;
+    }
+
+    .field-label {
+        @apply text-sm font-semibold text-slate-800;
+    }
+
+    .field-input {
+        @apply w-full rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-700 focus:ring-4 focus:ring-emerald-100;
+    }
+
+    .file-input {
+        @apply w-full rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition file:mr-4 file:rounded-xl file:border-0 file:bg-emerald-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-emerald-900 hover:file:bg-emerald-200 focus:border-emerald-700 focus:ring-4 focus:ring-emerald-100;
+    }
+
+    .metric-card {
+        @apply rounded-[1.5rem] border border-slate-900/5 bg-[linear-gradient(180deg,_rgba(255,255,255,0.95),_rgba(241,245,249,0.9))] px-5 py-4;
+    }
+
+    .metric-label {
+        @apply text-xs font-semibold uppercase tracking-[0.24em] text-slate-500;
+    }
+
+    .metric-value {
+        @apply mt-2 block text-3xl font-semibold tracking-tight text-slate-900;
+    }
+
+    .mini-stat {
+        @apply rounded-[1.5rem] border border-slate-900/5 bg-slate-50/80 px-4 py-5;
+    }
+
+    .mini-stat-label {
+        @apply block text-xs font-semibold uppercase tracking-[0.22em] text-slate-500;
+    }
+
+    .mini-stat-value {
+        @apply mt-2 block text-base font-semibold text-slate-900;
+    }
+
+    .feature-tile {
+        @apply rounded-[1.5rem] border border-slate-900/5 bg-slate-50/80 px-5 py-5;
+    }
+
+    .tag {
+        @apply inline-flex items-center rounded-full bg-slate-200/80 px-3 py-1 text-xs font-semibold text-slate-700;
+    }
+
+    .score-pill {
+        @apply inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-900;
+    }
+
+    .avatar-fallback {
+        @apply inline-flex items-center justify-center rounded-2xl bg-[linear-gradient(135deg,_#165a4c,_#f78334)] font-semibold tracking-wide text-white;
+    }
+}
+
+@keyframes toast-enter {
+    0% {
+        opacity: 0;
+        transform: translate3d(18px, -10px, 0) scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes toast-progress {
+    0% {
+        transform: scaleX(1);
+    }
+
+    100% {
+        transform: scaleX(0);
+    }
+}
